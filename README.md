@@ -10,7 +10,7 @@ There is also a master and slave machine that will be created using a bash-scrip
 
 > **heads up**: *the script is non-interactive*
 
-and on the slave we are going to be using an ansible playbook to run the same script that deploys laravel and LAMP Stack with a little difference 
+And on the slave we are going to be using an ansible playbook to run the same script that deploys laravel and LAMP Stack with a little difference 
 
 Ansible will also be helping us create a cron job the checks the servers uptime every 12 AM
 
@@ -23,7 +23,7 @@ looking at the repo above you can tell that there are just 2 directorties presen
 - Ansible-playbook
 - bash-script
 
-we will be looking at each one to get a deeper understanding of what the two directories do.
+We will be looking at each one to get a deeper understanding of what the two directories do.
 
 ---
 ### Ansible-Playbook
@@ -34,11 +34,11 @@ Going into the ansible playbook you would discover there are 3 files present:
 - bash.yml
 - inventory
 
-the ansible.cfg file holds all our configuration for ansible.
+The ansible.cfg file holds all our configuration for ansible.
 
-the bash.yaml holds all the tasks and plays you are going to run
+The bash.yaml holds all the tasks and plays you are going to run
 
-the inventory file holds the  domain or ip address you want to deploy the Laravel application to.
+The inventory file holds the  domain or ip address you want to deploy the Laravel application to.
 
 There is also a directory named **roles** and this is where the ansible roles will be placed 
 
@@ -47,9 +47,9 @@ There is also a directory named **roles** and this is where the ansible roles wi
 - copy_file
 - server_uptime
 
-the **copy_file** role copies the bash script that deploys laravel, make it executable and run it using the **commands** ansible module.
+The **copy_file** role copies the bash script that deploys laravel, make it executable and run it using the **commands** ansible module.
 
-the **server_uptime** role creates a cron job that checks the servers uptime every 12 AM using ansible.
+The **server_uptime** role creates a cron job that checks the servers uptime every 12 AM using ansible.
 
 
 ---
@@ -61,7 +61,7 @@ The bash script directory contains just 2 files:
 - Master-slave-vagrant.sh
 - LAMP.sh
 
-the **Master-slave-vagrant.sh** file hold the script that deploys a master and slave ubuntu vagrant machine with a static ip address.
+The **Master-slave-vagrant.sh** file hold the script that deploys a master and slave ubuntu vagrant machine with a static ip address.
 
 > slave: 192.168.20.11
 
@@ -77,7 +77,7 @@ This script is very readable and reuseable because of that it is flexible.
 
 The bash-script is to run when the master machine is up
 
-to run this script you will need to consider just 4 things
+To run this script you will need to consider just 4 things
 
 1. MySql database
 2. .ENV (laravel file)
@@ -90,9 +90,9 @@ due to the fact that we are using parameters to create a database while running 
 ```bash
 ./bash-script bertha bertha
 ```
-the 1st ARG is for the DB_USERNAME and DB_DATABASE
+The 1st Argument is for the DB_USERNAME and DB_DATABASE
 
-the 2nd ARG is for the DB_PASSWORD
+The 2nd Argument is for the DB_PASSWORD
 
 > **NOTE**: whatever username and password you are using it must align with the username and password in the .env file
 
@@ -108,9 +108,9 @@ sudo sed -i 's/DB_DATABASE=laravel/DB_DATABASE=bertha/' /var/www/html/laravel/.e
 sudo sed -i 's/DB_PASSWORD=/DB_PASSWORD=bertha/' /var/www/html/laravel/.env
 ```
 
-Make sure this three lines correspond with the ARG you will be adding while running the script.
+Make sure this three lines correspond with the argument you will be adding while running the script.
 
-you can find this code in the **bash-script** file and make changes to only the results after the = symbol on the right hand side.
+you can find this code in the **bash-script** "LAMP.sh" file and make changes to only the results after the = symbol on the right hand side.
 
 ## Ansible.config file
 
