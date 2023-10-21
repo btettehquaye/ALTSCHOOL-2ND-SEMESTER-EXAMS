@@ -1,0 +1,15 @@
+- name: copy the bash script to slave machine
+  copy:
+    src: laravel-slave.sh
+    dest: ~/
+    owner: root
+    group: root
+    mode: 0744
+
+- name: Set Execute Permissions on the Script
+  command: chmod +x ~/laravel-slave.sh
+
+- name: Run Bash Script
+  command: bash laravel-slave.sh bertha bertha < /dev/null 
+
+    

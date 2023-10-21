@@ -1,0 +1,11 @@
+- name: set cron job to check uptime of the server every 12 am
+  cron:
+    name: set cron job to check uptime of the server every 12 am
+    minute: "0"
+    hour: "0"
+    day: "*"
+    month: "*"
+    weekday: "*"
+   # user: "bertha"
+    job: "/usr/bin/uptime > /var/log/uptime_check.log 2>&1"
+    state: present
