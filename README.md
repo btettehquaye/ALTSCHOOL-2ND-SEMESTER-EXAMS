@@ -18,7 +18,7 @@ Ansible will also be helping us create a cron job the checks the servers uptime 
 
 ## BREAK DOWN OF THE REPO
 
-looking at the repo above you can tell that there are just 2 directorties present. which are:
+Looking at the repo above you can tell that there are just 2 directorties present. which are:
 
 - Ansible-playbook
 - bash-script
@@ -85,7 +85,7 @@ To run this script you will need to consider just 4 things
 
 ## MySql
 
-due to the fact that we are using parameters to create a database while running the script you will need just 2 arguments:
+Due to the fact that we are using parameters to create a database while running the script you will need just 2 arguments:
 
 ```bash
 ./bash-script bertha bertha
@@ -98,7 +98,7 @@ The 2nd Argument is for the DB_PASSWORD
 
 ## .ENV (laravel file)
 
-since everything is running automatically we will also need to change the .env file automatically:
+Since everything is running automatically we will also need to change the .env file automatically:
 
 ```bash bertha bertha
 sudo sed -i 's/DB_DATABASE=laravel/DB_DATABASE=bertha/' /var/www/html/laravel/.env
@@ -110,7 +110,7 @@ sudo sed -i 's/DB_PASSWORD=/DB_PASSWORD=bertha/' /var/www/html/laravel/.env
 
 Make sure this three lines correspond with the argument you will be adding while running the script.
 
-you can find this code in the **bash-script** "LAMP.sh" file and make changes to only the results after the = symbol on the right hand side.
+You can find this code in the **bash-script** "LAMP.sh" file and make changes to only the results after the = symbol on the right hand side.
 
 ## Ansible.config file
 
