@@ -1,22 +1,11 @@
 #!/bin/bash
-###############################################################
 
-# UPDATING & UPGRADING THE SERVER
-
-##############################################################
+## UPDATING & UPGRADING THE SERVER
 
 sudo apt update && sudo apt upgrade -y < /dev/null
 
-#################################################################
+## INSTALLING  LAMP STACK
 
-
-
-
-###############################################################
-
-# INSTALLATION OF LAMP STACK
-
-###############################################################
 sudo apt-get install apache2 -y < /dev/null
 
 sudo apt-get install mysql-server -y < /dev/null
@@ -31,14 +20,8 @@ sudo sed -i 's/cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/' /etc/php/8.2/apache2/php.
 
 sudo systemctl restart apache2 < /dev/null
 
-##################################################################
 
-
-########################################################################
-
-# INSTALL COMPOSER
-
-########################################################################
+## INSTALLING COMPOSER
 
 sudo apt install curl -y 
 
@@ -48,13 +31,8 @@ sudo mv composer.phar /usr/local/bin/composer
 
 composer --version < /dev/null
 
-#######################################################################
+## CONFIGURING APACHE2 AND ACTIVATING LARAVEL VIRTUAL SERVER 
 
-####################################################
-
-# CONFIGURATION OF APACHE2
-
-####################################################
 cat << EOF > /etc/apache2/sites-available/laravel.conf
 <VirtualHost *:80>
     ServerAdmin admin@example.com
@@ -78,14 +56,8 @@ sudo a2ensite laravel.conf
 
 sudo systemctl restart apache2
 
-#####################################################3
 
-
-########################################################################
-
-# CLONE LARAVEL APPLICATION AND DEPENDENCIES
-
-########################################################################
+# CLONING LARAVEL APPLICATION 
 
 mkdir /var/www/html/laravel && cd /var/www/html/laravel
 
@@ -106,15 +78,7 @@ cd /var/www/html/laravel && sudo cp .env.example .env
 php artisan key:generate
 
 
-#######################################################################
-
-
-
-#####################################################
-
 # CONFIGURING MYSQL: CREATING USER AND PASSWORD
-
-######################################################
 
 echo "Creating MySQL user and database"
 PASS=$2
@@ -134,16 +98,9 @@ echo "Username:   $1"
 echo "Database:   $1"
 echo "Password:   $PASS"
 
-########################################################
 
+# EXECUTING KEY GENERATE AND MIGRATE COMMAND FOR PHP
 
-
-
-#######################################################
-
-# EXECUTE KEY GENERATE AND MIGRATE COMMAND FOR PHP
-
-#########################################################
 
 sudo sed -i 's/DB_DATABASE=laravel/DB_DATABASE=bertha/' /var/www/html/laravel/.env
 
@@ -155,5 +112,4 @@ php artisan config:cache
 
 cd /var/www/html/laravel && php artisan migrate
 
-###########################################################
 
